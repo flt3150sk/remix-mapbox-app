@@ -2,7 +2,7 @@ import { json, LoaderFunctionArgs, redirect } from "@remix-run/cloudflare";
 import { useLoaderData } from "@remix-run/react";
 import { getShop } from "service/getShop";
 
-export const loader = async ({ params }: LoaderFunctionArgs) => {
+export const loader = async ({ params, context }: LoaderFunctionArgs) => {
   const id = params.slug;
 
   if (!id) {
@@ -10,7 +10,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
   }
 
   try {
-    const shop = await getShop(id);
+    const shop = await getShop(id, context);
   
     return json({ shop });
   } catch (error) {

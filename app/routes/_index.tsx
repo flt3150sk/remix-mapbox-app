@@ -1,9 +1,9 @@
-import { json } from "@remix-run/cloudflare";
+import { json, LoaderFunctionArgs } from "@remix-run/cloudflare";
 import { Link, useLoaderData } from "@remix-run/react";
 import { getShops } from "service/getShops";
 
-export const loader = async () => {
-  const shops = await getShops();
+export const loader = async ({ context }: LoaderFunctionArgs) => {
+  const shops = await getShops(context);
 
   return json({ shops });
 };

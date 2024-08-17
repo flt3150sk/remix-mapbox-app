@@ -1,14 +1,21 @@
 import { supabase } from "lib/supabase";
 import { shopSchema, Shop } from "domain/shop";
+import { LoaderFunctionArgs } from "@remix-run/cloudflare";
 
-export const getShop = async (shopId: string) => {
+export const getShop = async (
+  shopId: string,
+  context: LoaderFunctionArgs["context"]
+) => {
   try {
-    const { data } = await supabase
+    const { data } = await supabase(
+      context.cloudflare.env.SUPABASE_URL,
+      context.cloudflare.env.SUPABASE_ANON_KEY
+    )
       .from("shop")
       .select("*")
       .eq("id", shopId)
       .single();
-    
+
     if (!data) {
       throw new Error("Shop not found");
     }

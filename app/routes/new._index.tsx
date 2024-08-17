@@ -11,7 +11,7 @@ import { createShopDefaultValues, createShopSchema } from "domain/shop";
 import { CSSProperties } from "react";
 import { postShop } from "service/postShop";
 
-export async function action({ request }: ActionFunctionArgs) {
+export async function action({ request, context }: ActionFunctionArgs) {
   const formData = await request.formData();
   const submission = parseWithZod(formData, { schema: createShopSchema });
 
@@ -19,7 +19,7 @@ export async function action({ request }: ActionFunctionArgs) {
     return json(submission.reply());
   }
 
-  const shopId = await postShop(submission.value);
+  const shopId = await postShop(submission.value, context);
   return redirect(`/${shopId}`);
 }
 
