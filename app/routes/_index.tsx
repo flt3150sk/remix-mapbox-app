@@ -1,5 +1,5 @@
 import { json } from "@remix-run/cloudflare";
-import { useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 import { getShops } from "service/getShops";
 
 export const loader = async () => {
@@ -18,14 +18,9 @@ export default function Index() {
         {shops.map((shop) => (
           <li key={shop.id} className="p-4 flex flex-col gap-1">
             <h3 className="font-bold">
-              <a
-                className="text-blue-700 underline"
-                target="_blank"
-                href={`https://www.google.com/maps/search/?api=1&query=${shop.lat},${shop.lng}`}
-                rel="noreferrer"
-              >
+              <Link to={`/${shop.id}`} className="text-blue-700 underline">
                 {shop.name}
-              </a>
+              </Link>
             </h3>
             <p className="text-gray-500 text-sm">{shop.description}</p>
           </li>

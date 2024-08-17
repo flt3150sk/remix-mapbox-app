@@ -8,15 +8,12 @@ export const Header = () => {
       <h1 className="text-3xl">🍜 Ramen App</h1>
       <ul className="flex gap-4 items-center">
         <li>
-          <Link to="https://remix.run/docs" className="flex gap-1 items-center">
+          <Link to="/" className="flex gap-1 items-center">
             <span>🔍</span>探す
           </Link>
         </li>
         <li>
-          <Link
-            to="https://developers.cloudflare.com/pages/framework-guides/deploy-a-remix-site/"
-            className="flex gap-1 items-center"
-          >
+          <Link to="/new" className="flex gap-1 items-center">
             <span>🖊️</span>追加する
           </Link>
         </li>
