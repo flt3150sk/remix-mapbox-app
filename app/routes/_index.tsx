@@ -1,40 +1,35 @@
-import type { MetaFunction } from "@remix-run/cloudflare";
+import { json } from "@remix-run/cloudflare";
+import { useLoaderData } from "@remix-run/react";
+import { getShops } from "service/getShops";
 
-export const meta: MetaFunction = () => {
-  return [
-    { title: "New Remix App" },
-    {
-      name: "description",
-      content: "Welcome to Remix on Cloudflare!",
-    },
-  ];
+export const loader = async () => {
+  const shops = await getShops();
+
+  return json({ shops });
 };
 
 export default function Index() {
+  const { shops } = useLoaderData<typeof loader>();
+
   return (
-    <div className="font-sans p-4">
-      <h1 className="text-3xl">Welcome to Remix on Cloudflare</h1>
-      <ul className="list-disc mt-4 pl-6 space-y-2">
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://remix.run/docs"
-            rel="noreferrer"
-          >
-            Remix Docs
-          </a>
-        </li>
-        <li>
-          <a
-            className="text-blue-700 underline visited:text-purple-900"
-            target="_blank"
-            href="https://developers.cloudflare.com/pages/framework-guides/deploy-a-remix-site/"
-            rel="noreferrer"
-          >
-            Cloudflare Pages Docs - Remix guide
-          </a>
-        </li>
+    <div className="flex">
+      <div className="flex-1 h-[calc(100vh_-_68px)]"></div>
+      <ul className="w-80 border-l border border-gray-200 divide-y-[1px] h-[calc(100vh_-_68px)] overflow-scroll">
+        {shops.map((shop) => (
+          <li key={shop.id} className="p-4 flex flex-col gap-1">
+            <h3 className="font-bold">
+              <a
+                className="text-blue-700 underline"
+                target="_blank"
+                href={`https://www.google.com/maps/search/?api=1&query=${shop.lat},${shop.lng}`}
+                rel="noreferrer"
+              >
+                {shop.name}
+              </a>
+            </h3>
+            <p className="text-gray-500 text-sm">{shop.description}</p>
+          </li>
+        ))}
       </ul>
     </div>
   );
