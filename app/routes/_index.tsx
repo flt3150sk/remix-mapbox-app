@@ -1,5 +1,6 @@
 import { json, LoaderFunctionArgs } from "@remix-run/cloudflare";
 import { Link, useLoaderData } from "@remix-run/react";
+import { MapBox } from "components/map-box";
 import { getShops } from "service/getShops";
 
 export const loader = async ({ context }: LoaderFunctionArgs) => {
@@ -13,7 +14,9 @@ export default function Index() {
 
   return (
     <div className="flex">
-      <div className="flex-1 h-[calc(100vh_-_68px)]"></div>
+      <div className="flex-1 h-[calc(100vh_-_68px)]">
+        <MapBox shops={shops} />
+      </div>
       <ul className="w-80 border-l border border-gray-200 divide-y-[1px] h-[calc(100vh_-_68px)] overflow-scroll">
         {shops.map((shop) => (
           <li key={shop.id} className="p-4 flex flex-col gap-1">
