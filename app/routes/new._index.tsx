@@ -5,11 +5,13 @@ import {
   getInputProps,
   getTextareaProps,
   useForm,
+  useInputControl,
 } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 import { createShopDefaultValues, createShopSchema } from "domain/shop";
-import { CSSProperties } from "react";
+import { CSSProperties, useCallback } from "react";
 import { postShop } from "service/postShop";
+import { MapBoxClick } from "components/map-box-click";
 
 export async function action({ request, context }: ActionFunctionArgs) {
   const formData = await request.formData();
@@ -35,9 +37,22 @@ export default function New() {
     shouldRevalidate: "onInput",
   });
 
+  const { change: latChange } = useInputControl(fields.lat);
+  const {change: lngChange} = useInputControl(fields.lng);
+
+  const handleClickMap = useCallback(
+    (lngInput: number, latInput: number) => {
+      latChange(String(latInput));
+      lngChange(String(lngInput));
+    },
+    [latChange, lngChange]
+  );
+
   return (
     <div className="flex">
-      <div className="flex-1 h-[calc(100vh_-_68px)]"></div>
+      <div className="flex-1 h-[calc(100vh_-_68px)]">
+        <MapBoxClick handleClickMap={handleClickMap} />
+      </div>
       <Form
         {...getFormProps(form)}
         method="post"
