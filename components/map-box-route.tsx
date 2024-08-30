@@ -33,7 +33,7 @@ export const MapBoxRoute = ({
 
     mapRef.current = new mapboxgl.Map({
       container: mapContainerRef.current,
-      style: "mapbox://styles/flt3150sk/clzxse743004n01psfpyp5fav",
+      style: "mmapbox://styles/flt3150sk/cm0gaqlwt00s201om35r9afs8",
       center: [currentLng, currentLat],
       zoom: 14,
       attributionControl: false,

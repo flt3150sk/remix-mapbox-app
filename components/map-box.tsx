@@ -47,7 +47,7 @@ export const MapBox = ({ shops }: Props) => {
 
     mapRef.current = new mapboxgl.Map({
       container: mapContainerRef.current,
-      style: "mapbox://styles/flt3150sk/cm0fbue9300zi01pn0ery01wn",
+      style: "mapbox://styles/flt3150sk/cm0gaqlwt00s201om35r9afs8",
       center: [135.2384423, 34.7148621],
       zoom: 15,
       attributionControl: false,

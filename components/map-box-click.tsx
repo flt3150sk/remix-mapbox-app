@@ -24,7 +24,7 @@ export const MapBoxClick = ({ handleClickMap }: Props) => {
 
     mapRef.current = new mapboxgl.Map({
       container: mapContainerRef.current,
-      style: "mapbox://styles/flt3150sk/clzxse743004n01psfpyp5fav",
+      style: "mapbox://styles/flt3150sk/cm0gaqlwt00s201om35r9afs8",
       center: [135.2384423, 34.7148621],
       zoom: 15,
       attributionControl: false,
